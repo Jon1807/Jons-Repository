@@ -12,8 +12,9 @@ git push origin master
 <!--Steps-->
 touch
 git add
-git push
 git commit -m " "
+git push
+
 
 git pull
 
