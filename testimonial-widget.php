@@ -626,8 +626,7 @@ class Essential_Elementor_Testimonial_Widget extends \Elementor\Widget_Base {
 			</div>
 		</div>
         <!-- End rendering the output finally-->
-
-        <?php
 		
+        <?php
 	}						
 }
