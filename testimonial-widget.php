@@ -147,7 +147,7 @@ class Essential_Elementor_Testimonial_Widget extends \Elementor\Widget_Base {
 		// 			'fa fa-shopping-cart',
 		// 			'fa fa-star',
 		// 		],
-		// 		'default' => 'fa fa-star',
+		// 		'default' => 'fa fa-shopping-cart',
 		// 	]
 		// );
 
