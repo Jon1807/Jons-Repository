@@ -1,36 +1,7 @@
-<!--CSS-->
-<style>
-	.mt-tgrid-metas{
-    display: flex; 
-    justify-content: space-between; 
-    margin-top: 20px;
-}
-
-.mt-tgrid-rightmetas{
-    display:flex;
-}
-
-.mt_btn_medium_1{
-    padding: 11px 25px;
-}
-
-.mt_btn_medium_2{
-    padding: 12px;;
-}
-
-.mt-btn-gradient{
-	-webkit-transition: all 250ms ease-in-out;
-	background: linear-gradient(135deg,#fe8045 0%,#fe4e55 100%);
-}
-</style>
-
-<!--PHP-->
-
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
-}
-class Essential_Elementor_Multi_Vendor_Widget extends \Elementor\Widget_Base { 
+namespace Elementor;
+
+class addons_multi_vendor_widget extends Widget_Base { 
    /**
 	 * Get widget name.
 	 *
@@ -208,6 +179,23 @@ class Essential_Elementor_Multi_Vendor_Widget extends \Elementor\Widget_Base {
 		);	
 
 		$this->add_control(
+			'widget_category',
+			[
+				'label' => esc_html__( 'Link Category', 'plugin-name' ),
+				'type' => \Elementor\Controls_Manager::URL,
+				'placeholder' => esc_html__( 'https://your-link.com', 'plugin-name' ),
+				'options' => [ 'url', 'is_external', 'nofollow' ],
+				'default' => [
+					'url' => '',
+					'is_external' => true,
+					'nofollow' => true,
+					// 'custom_attributes' => '',
+				],
+				'label_block' => true,
+			]
+		);
+
+		$this->add_control(
 			'mt_tgrid_category2',
 			[
 				'label' => esc_html__( 'Second Card Category', 'essential-elementor-widget' ),
@@ -216,6 +204,23 @@ class Essential_Elementor_Multi_Vendor_Widget extends \Elementor\Widget_Base {
 				'placeholder' => esc_html__( 'Your second Category here', 'essential-elementor-widget' ),
 			]
 		);	
+
+		$this->add_control(
+			'widget_category2',
+			[
+				'label' => esc_html__( 'Second Link Category', 'plugin-name' ),
+				'type' => \Elementor\Controls_Manager::URL,
+				'placeholder' => esc_html__( 'https://your-link.com', 'plugin-name' ),
+				'options' => [ 'url', 'is_external', 'nofollow' ],
+				'default' => [
+					'url' => '',
+					'is_external' => true,
+					'nofollow' => true,
+					// 'custom_attributes' => '',
+				],
+				'label_block' => true,
+			]
+		);
 
 		$this->add_control(
 			'mt_tgrid_category3',
@@ -228,9 +233,9 @@ class Essential_Elementor_Multi_Vendor_Widget extends \Elementor\Widget_Base {
 		);	
 
 		$this->add_control(
-			'widget_category',
+			'widget_category3',
 			[
-				'label' => esc_html__( 'Link category', 'plugin-name' ),
+				'label' => esc_html__( 'Third Link Category', 'plugin-name' ),
 				'type' => \Elementor\Controls_Manager::URL,
 				'placeholder' => esc_html__( 'https://your-link.com', 'plugin-name' ),
 				'options' => [ 'url', 'is_external', 'nofollow' ],
@@ -684,6 +689,18 @@ class Essential_Elementor_Multi_Vendor_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'padding',
+			[
+				'label' => esc_html__( 'Padding', 'plugin-name' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .mt-tgrid-details' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->end_controls_section();
 	}
 
@@ -710,7 +727,7 @@ class Essential_Elementor_Multi_Vendor_Widget extends \Elementor\Widget_Base {
 		$mt_tgrid_btn_medium = $settings['mt_btn_medium_1'];
 		$mt_tgrid_btn_medium2 = $settings['mt_btn_medium_2'];
 
-
+		wp_enqueue_style( 'multi-vendor-widget', plugins_url( '../../../css/multi-vendor-widget.css' , __FILE__ ));
 		?>
 
         <!-- Start rendering the output -->
@@ -736,10 +753,20 @@ class Essential_Elementor_Multi_Vendor_Widget extends \Elementor\Widget_Base {
 							$this->add_link_attributes( 'widget_category', $settings['widget_category'] );
 					}?>
 					<a <?php echo $this->get_render_attribute_string( 'widget_category' ); ?>>
-						<h4 class="mt_tgrid_category"><?php echo esc_html__($mt_tgrid_category, 'essential-elementor-widget');  ?> / <?php echo esc_html__($mt_tgrid_category2, 'essential-elementor-widget');  ?> / <?php echo esc_html__($mt_tgrid_category3, 'essential-elementor-widget');  ?></h4>
-					</a> <?php if ( ! empty( $settings['widget_category']['url'] ) ) {
-							$this->add_link_attributes( 'widget_category', $settings['widget_category'] );
-					}?>				
+						<h4 class="mt_tgrid_category"><?php echo esc_html__($mt_tgrid_category, 'essential-elementor-widget');  ?> /</h4>
+					</a>	
+					<?php if ( ! empty( $settings['widget_category2']['url'] ) ) {
+							$this->add_link_attributes( 'widget_category2', $settings['widget_category2'] );
+					}?>
+					<a <?php echo $this->get_render_attribute_string( 'widget_category2' ); ?>>
+						<h4 class="mt_tgrid_category"><?php echo esc_html__($mt_tgrid_category2, 'essential-elementor-widget');  ?> /</h4>
+					</a>
+					<?php if ( ! empty( $settings['widget_category3']['url'] ) ) {
+							$this->add_link_attributes( 'widget_category3', $settings['widget_category3'] );
+					}?>
+					<a <?php echo $this->get_render_attribute_string( 'widget_category3' ); ?>>
+						<h4 class="mt_tgrid_category"><?php echo esc_html__($mt_tgrid_category3, 'essential-elementor-widget');  ?></h4>
+					</a>	
 				</h4>
 				</div>
 			<div class="mt-tgrid-metas">
@@ -758,7 +785,7 @@ class Essential_Elementor_Multi_Vendor_Widget extends \Elementor\Widget_Base {
 						<?php if ( ! empty( $settings['mt-btn-medium-2-link']['url'] ) ) {
 							$this->add_link_attributes( 'mt-btn-medium-2-link', $settings['mt-btn-medium-2-link'] );
 						}?>
-						<a  <?php echo $this->get_render_attribute_string( 'mt-btn-medium-2-link' ); ?>> 
+						<a class="icon-button" <?php echo $this->get_render_attribute_string( 'mt-btn-medium-2-link' ); ?>> 
 						<?php \Elementor\Icons_Manager::render_icon( $settings['mt_btn_medium_2'], [ 'aria-hidden' => 'true' ] ); ?>
 						</a>
 					</div>

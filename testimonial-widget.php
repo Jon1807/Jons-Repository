@@ -1,30 +1,7 @@
-<!--CSS-->
-<style>
-
-.mt-testimonials-img-holder {
-    display: inline-block;
-    float: left;
-    width: 50px;
-    margin-right: 10px;
-}
-
-.mt-testimonials-stars i{
-	margin-right:4px;
-}
-.mt-testimonials-stars{
-	position: absolute;
-    transform: translate(-20px,10px);
-}
-
-</style>
-
-<!--PHP-->
-
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
-}
-class Essential_Elementor_Testimonial_Widget extends \Elementor\Widget_Base { 
+namespace Elementor;
+
+class addons_testimonial_widget extends Widget_Base { 
    /**
 	 * Get widget name.
 	 *
@@ -147,7 +124,7 @@ class Essential_Elementor_Testimonial_Widget extends \Elementor\Widget_Base {
 		// 			'fa fa-shopping-cart',
 		// 			'fa fa-star',
 		// 		],
-		// 		'default' => 'fa fa-star',
+		// 		'default' => 'fa fa-shopping-cart',
 		// 	]
 		// );
 
@@ -594,6 +571,8 @@ class Essential_Elementor_Testimonial_Widget extends \Elementor\Widget_Base {
 		$mt_testimonials_theme = $settings['mt_testimonials_theme'];
 		$mt_testimonials_img_holder = $settings['mt_testimonials_img_holder'];
 		$mt_testimonials_icon_holder = $settings['mt_testimonials_icon_holder'];
+
+		wp_enqueue_style( 'testimonial-widget', plugins_url( '../../../css/testimonial-widget.css' , __FILE__ ));
 		?>
 
         <!-- Start rendering the output -->
@@ -628,6 +607,5 @@ class Essential_Elementor_Testimonial_Widget extends \Elementor\Widget_Base {
         <!-- End rendering the output finally-->
 
         <?php
-		
 	}						
 }
