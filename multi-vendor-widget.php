@@ -147,7 +147,7 @@ class addons_multi_vendor_widget extends Widget_Base {
 				'label' => esc_html__( 'Card Title', 'essential-elementor-widget' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
 				'label_block' => true,
-				'placeholder' => esc_html__( 'Your card title here', 'essential-elementor-widget' ),
+				'placeholder' => esc_html__( 'Your card title goes here', 'essential-elementor-widget' ),
 			]
 		);
 
